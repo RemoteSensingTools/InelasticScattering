@@ -1,0 +1,7 @@
+name = "InelasticScattering"
+uuid = "2ab0ce74-51a9-4f29-ba4a-fc83f8a1594c"
+authors = ["sanghavi "]
+version = "0.1.0"
+
+[deps]
+DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
