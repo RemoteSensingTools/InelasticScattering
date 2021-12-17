@@ -2,7 +2,7 @@ using InelasticScattering
 using Plots
 λ = 440*1.e-7 #cm
 ν̃ = 1/λ
-T = 250 #k
+T = 300 #k
 
 n2 = InelasticScattering.getMolecularConstants(InelasticScattering.N₂(), (0.8));
 compute_effective_coefficents!(ν̃, T, n2)

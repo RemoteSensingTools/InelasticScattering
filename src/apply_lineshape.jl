@@ -1,16 +1,20 @@
 const c₂                 = 1.4387769
-const cMassMol           = 1.66053873e-27
-const cSqrtLn2divSqrtPi  = 0.469718639319144059835
-const cLn2               = 0.6931471805599
-const cSqrtLn2           = 0.8325546111577
-const cSqrt2Ln2          = 1.1774100225
-const cc_                = 2.99792458e8
-const cBolts_            = 1.3806503e-23
+const cMassMol           = 1.66053873e-27 #grams per molecule for unit molec. mass
+const cSqrtLn2divSqrtPi  = 0.469718639319144059835 #√(ln2/π)
+const cLn2               = 0.6931471805599 #ln2
+const cSqrtLn2           = 0.8325546111577 #√(ln2)
+const cSqrt2Ln2          = 1.1774100225 #√(2ln2)
+const cc_                = 2.99792458e8 #speed of light [m/s]
+const cBolts_            = 1.3806503e-23 #Boltzmann const. [J/K]
 const p_ref              = 1013.25  # reference pressure [hPa]
 const t_ref              = 296.0    # reference temperature [K]
 const nm_per_m           = 1.0e7
-
+# Note: ν stands for wavenumber in the following (NOT frequency)
 function apply_lineshape!(Δνᵢ, σᵢ,  # discrete transitions
+                λ₀,                 # incident  wavelength [nm]
+                # Note:  λ₀ can either be used to denote an individual 
+                # wavelength or as a representative (e.g. central) 
+                # wavelength for a specific band
                 Δν_out,             # Output grid (equidistant)
                 σ_out,              # σ at output grid
                 pressure::Real,     # actual pressure [hPa]
@@ -38,8 +42,8 @@ function apply_lineshape!(Δνᵢ, σᵢ,  # discrete transitions
         # Test that this ν lies within the grid
         if grid_min < Δνᵢ[j] < grid_max
 
-            # Dummy for now:
-            ν = 13500.0
+            
+            ν = Δνᵢ[j] + nm_per_m/λ₀#13500.0 #Dummy for now #Suniti
 
             # Compute Doppler HWHM, ν still needs to be supplied, @Suniti?:
             γ_d = ((cSqrt2Ln2 / cc_) * sqrt(cBolts_ / cMassMol) * sqrt(temperature) * 
@@ -48,7 +52,7 @@ function apply_lineshape!(Δνᵢ, σᵢ,  # discrete transitions
             @show γ_d
 
             # line intensity 
-            S = σᵢ[j]
+            S = σᵢ[j] *  ν^4 #Suniti
 
             wing_cutoff = 4γ_d 
 

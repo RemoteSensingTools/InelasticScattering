@@ -13,8 +13,13 @@ function compute_effective_coefficents!(ν_eff, T, mol::MolecularConstants{FT}) 
     ϵ_prime = α_prime/γ_prime
     γ_C_VibRaman =  3/(45(ϵ_prime)^2+4)
     γ_C_RoVibRaman = 3/4
+    rho_depol_Rayl = 2γ_C_Rayl/(1 + γ_C_Rayl) # depolarization factor, as defined in Table 1 (Spurr 2006)
+    rho_depol_RotRaman = 2γ_C_RotRaman/(1 + γ_C_RotRaman) # depolarization factor, as defined in Table 1 (Spurr 2006)
+    rho_depol_VibRaman = 2γ_C_VibRaman/(1 + γ_C_VibRaman) # depolarization factor, as defined in Table 1 (Spurr 2006)
+    rho_depol_RoVibRaman = 2γ_C_RoVibRaman/(1 + γ_C_RoVibRaman) # depolarization factor, as defined in Table 1 (Spurr 2006)
 
-    @pack! mol.effCoeff = α̅, γ̅, α_prime, γ_prime, ϵ, ϵ_prime, γ_C_Rayl, γ_C_RotRaman, γ_C_VibRaman, γ_C_RoVibRaman
+    @pack! mol.effCoeff = rho_depol_Rayl, rho_depol_RotRaman, rho_depol_VibRaman, rho_depol_RoVibRaman,
+        α̅, γ̅, α_prime, γ_prime, ϵ, ϵ_prime, γ_C_Rayl, γ_C_RotRaman, γ_C_VibRaman, γ_C_RoVibRaman
 end
 
 #Compute elastic scattering cross-section (Cabannes line)

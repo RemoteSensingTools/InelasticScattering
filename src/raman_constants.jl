@@ -86,10 +86,14 @@ Base.@kwdef mutable struct EffectiveCoefficients{FT}
     #F_King_prime::FT
     "α_prime/γ_prime"
     ϵ_prime::FT
-    γ_C_Rayl::FT #3/(45(ϵ)^2+4)
-    γ_C_RotRaman::FT #3/4
-    γ_C_VibRaman::FT #3/(45(ϵ_prime)^2+4)
-    γ_C_RoVibRaman::FT #3/4
+    γ_C_Rayl::FT # 3/(45(ϵ)^2+4)
+    γ_C_RotRaman::FT # 3/4
+    γ_C_VibRaman::FT # 3/(45(ϵ_prime)^2+4)
+    γ_C_RoVibRaman::FT # 3/4
+    rho_depol_Rayl::FT # 2γ_C_Rayl/(1+γ_C_Rayl)
+    rho_depol_RotRaman::FT # 2γ_C_RotRaman/(1+γ_C_RotRaman)
+    rho_depol_VibRaman::FT # 2γ_C_VibRaman/(1+γ_C_VibRaman)
+    rho_depol_RoVibRaman::FT # 2γ_C_RoVibRaman/(1+γ_C_RoVibRaman)
     "Rayl cross-section σ(ν) = σ_Rayl_coeff * (ν)⁴"
     σ_Rayl_coeff::FT  #Cross-section = σ_Rayl_coeff * ν⁴
     σ_Rayl_coeff_hires::AbstractArray{FT}
