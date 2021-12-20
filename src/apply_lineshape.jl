@@ -46,10 +46,9 @@ function apply_lineshape!(Δνᵢ, σᵢ,  # discrete transitions
             ν = Δνᵢ[j] + nm_per_m/λ₀#13500.0 #Dummy for now #Suniti
 
             # Compute Doppler HWHM, ν still needs to be supplied, @Suniti?:
-            γ_d = ((cSqrt2Ln2 / cc_) * sqrt(cBolts_ / cMassMol) * sqrt(temperature) * 
-            ν / sqrt(molMass))
+            γ_d = ((cSqrt2Ln2 / cc_) * sqrt(cBolts_ / cMassMol) * sqrt(temperature) * ν / sqrt(molMass))
 
-            @show γ_d
+            @show γ_d, Δνᵢ[j]
 
             # line intensity 
             S = σᵢ[j] *  ν^4 #Suniti
